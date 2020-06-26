@@ -1,3 +1,5 @@
+import React from 'react';
+
 function component() {
     const element = document.createElement('div');
 
