@@ -1,9 +1,25 @@
 const path = require('path');
 
+const devtool = process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map'
+
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.ts',
+    devtool,
+    mode: process.env.NODE_ENV,
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js']
+    },
     output: {
-        filename: 'main.js',
+        filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     }
 }
