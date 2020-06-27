@@ -1,11 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-function component() {
-    const element = document.createElement('div');
+const root = document.getElementById("app");
 
-    element.innerHTML = ['Hello', 'webpack'].join(' ');
-
-    return element;
-}
-
-document.body.appendChild(component());
+ReactDOM.render(
+    <h1>Hello World</h1>,
+    root
+);

@@ -1,0 +1,16 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "node": true,
+                    "chrome": "52"
+                }
+            }
+        ],
+        [
+            "@babel/preset-react"
+        ]
+    ]
+}
