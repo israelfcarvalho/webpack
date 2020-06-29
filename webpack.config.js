@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackplugin = require('html-webpack-plugin');
 
 const devtool = process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map'
 
@@ -8,6 +9,12 @@ module.exports = {
     },
     devtool,
     mode: process.env.NODE_ENV,
+    plugins: [
+        new HtmlWebpackplugin({
+            title: 'Output Management', 
+            template: './src/index.html',
+        })
+    ],
     module: {
         rules: [
             {
@@ -35,6 +42,10 @@ module.exports = {
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 use:['file-loader']
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader']
             }
         ]
     },
