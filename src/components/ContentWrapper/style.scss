@@ -1,3 +1,8 @@
 .ContentWrapper {
-    background-image: url('../../assets/images/background.png');
+    width: 100vw;
+    height: 100vh;
+
+    &__middleContent {
+        background-image: url('../../assets/images/background.png');
+    }
 }
