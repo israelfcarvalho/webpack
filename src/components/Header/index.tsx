@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import webpackLogo from '../../assets/images/webpack-logo.png';
 import "./style.scss";
@@ -10,9 +10,6 @@ export interface PropsHeader {
 const Header: React.FC<PropsHeader> = ({
     title
 }) => {
-    const [count, setCount] = useState(0);
-
-
     return (
         <header className="Header">
             {title}

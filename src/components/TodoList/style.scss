@@ -1,0 +1,23 @@
+.TodoList {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+
+    background-color: #ffffffaa;
+
+    &__item {
+        background-color: red;
+        transition: background-color 100ms ease;
+
+        display: flex;
+        justify-content: space-between;
+
+        &.checked {
+            background-color: green;
+        }
+    }
+
+    li + li {
+        margin: 4px 0;
+    }
+}
