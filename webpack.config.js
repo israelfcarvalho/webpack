@@ -6,6 +6,22 @@ const webpack = require("webpack");
 const isProduction = process.env.NODE_ENV === "production";
 const devtool = isProduction ? "source-map" : "eval-source-map";
 
+const plugins = [
+  new CleanWebpackPlugin(),
+  new HtmlWebpackplugin({
+    title: "Caching",
+    template: "./src/index.html",
+  })
+]
+
+if(!isProduction) {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  )
+}
+
+const hashName = isProduction ? 'contenthash' : 'hash';
+
 module.exports = {
   entry: {
     app: [
@@ -16,14 +32,7 @@ module.exports = {
   },
   devtool,
   mode: process.env.NODE_ENV,
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(),
-    new HtmlWebpackplugin({
-      title: "Output Management",
-      template: "./src/index.html",
-    }),
-  ],
+  plugins,
   module: {
     rules: [
       {
@@ -61,9 +70,22 @@ module.exports = {
     },
   },
   output: {
-    filename: "[name].bundle.js",
-    chunkFilename: "[name].bundle.js",
+    filename: `[name].[${hashName}].js`,
+    chunkFilename: `[name].[${hashName}].js`,
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
   },
+  optimization: {
+    runtimeChunk: 'single',
+    moduleIds: 'hashed',
+    splitChunks : {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  }
 };
