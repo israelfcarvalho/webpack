@@ -5,8 +5,8 @@
   "private": "true",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "node server/index.js"
+    "build:production": "webpack --env.NODE_ENV=production",
+    "build:dev": "node server/index.js"
   },
   "repository": {
     "type": "git",
