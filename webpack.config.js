@@ -13,21 +13,23 @@ const plugins = [
 
 module.exports = (env) => {
   const isProduction = env.NODE_ENV === "production";
-  const devtool = isProduction ? "source-map" : "eval-source-map";
+  const devtool = isProduction ? "source-map" : "";
+  const appEntry = './src/index.tsx';
+  const app = [];
 
   if (!isProduction) {
     plugins.push(new webpack.HotModuleReplacementPlugin());
+
+    app.push("react-hot-loader/patch");
+    app.push("webpack-hot-middleware/client");
   }
   
   const hashName = isProduction ? "contenthash" : "hash";
+  app.push(appEntry);
 
   return {
     entry: {
-      app: [
-        "react-hot-loader/patch",
-        "webpack-hot-middleware/client",
-        "./src/index.tsx",
-      ],
+      app,
     },
     devtool,
     mode: env.NODE_ENV,
@@ -72,7 +74,7 @@ module.exports = (env) => {
       filename: `[name].[${hashName}].js`,
       chunkFilename: `[name].[${hashName}].js`,
       path: path.resolve(__dirname, "dist"),
-      publicPath: "/",
+      publicPath: "./",
     },
     optimization: {
       runtimeChunk: "single",
@@ -86,6 +88,6 @@ module.exports = (env) => {
           },
         },
       },
-    },
+    }
   };
 };

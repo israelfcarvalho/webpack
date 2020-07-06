@@ -8,6 +8,7 @@ import Header from './components/Header';
 import ErrorBoundary from './components/ErrorBoundary';
 
 import { Todo } from './components/TodoList';
+import {cube} from './utils/functions/math';
 
 import './style.scss';
 
@@ -18,6 +19,8 @@ const todoList: List<Todo> = List([
     {id: 2, description: 'todo 2', isChecked: false},
     {id: 3, description: 'todo 3', isChecked: true}
 ])
+
+console.log({cube_3: cube(3)})
 
 const App: React.FC = () => {
     const [showTodoList, setShowTodoList] = useState(false);
