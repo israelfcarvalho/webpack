@@ -9,6 +9,8 @@ const HTML_FILE = path.join(DIST_DIR, 'index.html');
 const config = require('../config/webpack/webpack.prod');
 const compiler = webpack(config);
 
+compiler.run();
+
 app.use(express.static(DIST_DIR));
 app.get('*', (req, res) => {
     res.sendFile(HTML_FILE);

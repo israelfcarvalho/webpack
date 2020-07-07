@@ -20,7 +20,16 @@ const todoList: List<Todo> = List([
     {id: 3, description: 'todo 3', isChecked: true}
 ])
 
-console.log({cube_3: cube(3)})
+if('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('SW registered: ', registration);
+        })
+        .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+        })
+    })
+}
 
 const App: React.FC = () => {
     const [showTodoList, setShowTodoList] = useState(false);

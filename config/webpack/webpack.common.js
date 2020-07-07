@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env) => {
   console.log("Webpack environment: ", env.NODE_ENV || process.env.NODE_ENV);
+  
   return {
     entry: {
       app: ["./src/index.tsx"],
