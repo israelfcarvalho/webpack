@@ -1,30 +1,29 @@
 const path = require("path");
 const HtmlWebpackplugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const webpack = require("webpack");
+
+const environmentPlugins = require("./config/webpack/plugins");
 
 const plugins = [
-  new CleanWebpackPlugin(),
-  new HtmlWebpackplugin({
-    title: "Caching",
-    template: "./src/index.html",
-  }),
-];
+    new CleanWebpackPlugin(),
+    new HtmlWebpackplugin({
+      title: "Caching",
+      template: "./src/index.html",
+    }),
+  ];
 
 module.exports = (env) => {
-  const isProduction = env.NODE_ENV === "production";
-  const devtool = isProduction ? "source-map" : "";
+  const environment = process.env.NODE_ENV;
+  const devtool = environment === 'production' ? "source-map" : "";
   const appEntry = './src/index.tsx';
   const app = [];
 
-  if (!isProduction) {
-    plugins.push(new webpack.HotModuleReplacementPlugin());
-
+  if (environment !== 'production') {
     app.push("react-hot-loader/patch");
     app.push("webpack-hot-middleware/client");
   }
   
-  const hashName = isProduction ? "contenthash" : "hash";
+  const hashName = environment === 'production' ? "contenthash" : "hash";
   app.push(appEntry);
 
   return {
@@ -32,8 +31,8 @@ module.exports = (env) => {
       app,
     },
     devtool,
-    mode: env.NODE_ENV,
-    plugins,
+    mode: environment,
+    plugins: plugins.concat(environmentPlugins[environment]),
     module: {
       rules: [
         {
@@ -67,7 +66,7 @@ module.exports = (env) => {
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
       alias: {
-        "react-dom": isProduction ? "react-dom" : "@hot-loader/react-dom",
+        "react-dom": environment === 'production' ? "react-dom" : "@hot-loader/react-dom",
       },
     },
     output: {
