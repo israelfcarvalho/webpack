@@ -11,5 +11,9 @@ module.exports = merge(common, {
   plugins: [new WorkboxPlugin.GenerateSW({
     clientsClaim: true,
     skipWaiting: true
-  }) ]
+  }) ],
+  output : {
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js'
+  }
 });

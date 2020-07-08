@@ -1,11 +1,12 @@
 const path = require("path");
 const HtmlWebpackplugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { CleanWebpackPlugin} = require("clean-webpack-plugin");
+const webpack = require('webpack');;
 
 module.exports = (env) => {
   console.log("Webpack environment: ", env.NODE_ENV || process.env.NODE_ENV);
   
-  return {
+  return webpack({
     entry: {
       app: ["./src/index.tsx"],
     },
@@ -67,6 +68,7 @@ module.exports = (env) => {
                 }
             }
         }
-    }
-  };
+    },
+  })
+  .options;
 };
