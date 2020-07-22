@@ -1,11 +1,11 @@
 const path = require("path");
 const HtmlWebpackplugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin} = require("clean-webpack-plugin");
-const webpack = require('webpack');;
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = (env) => {
   console.log("Webpack environment: ", env.NODE_ENV || process.env.NODE_ENV);
-  
+
   return webpack({
     entry: {
       app: ["./src/index.tsx"],
@@ -31,7 +31,7 @@ module.exports = (env) => {
               babelrc: true,
             },
           },
-          exclude: /node_modules/
+          exclude: /node_modules/,
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
@@ -51,24 +51,22 @@ module.exports = (env) => {
       extensions: [".tsx", ".ts", ".js"],
     },
     output: {
-        filename: '[name].js',
-        chunkFilename: '[name].js',
-        path: path.resolve(__dirname, '../../dist', ''),
-        publicPath: "/",
+      filename: "[name].js",
+      chunkFilename: "[name].js",
+      path: path.resolve(__dirname, "../../dist", ""),
     },
     optimization: {
-        runtimeChunk: "single",
-        moduleIds: "hashed",
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendors',
-                    chunks: 'all'
-                }
-            }
-        }
+      runtimeChunk: "single",
+      moduleIds: "hashed",
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+        },
+      },
     },
-  })
-  .options;
+  }).options;
 };
