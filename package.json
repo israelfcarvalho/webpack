@@ -59,6 +59,7 @@
     "workbox-webpack-plugin": "^5.1.3"
   },
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
